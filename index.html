@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Онлайн-запис до ветеринарної клініки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 12px;
+        }
+        .result {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Запис тварини на прийом</h3>
+
+    <label>Кличка тварини:
+        <input type="text" id="petName">
+    </label>
+
+    <label>Послуга:
+        <select id="service">
+            <option value="300">Огляд терапевта — 300 грн</option>
+            <option value="450">Щеплення — 450 грн</option>
+            <option value="250">Стрижка кігтів — 250 грн</option>
+        </select>
+    </label>
+
+    <label>Дата прийому:
+        <input type="date" id="visitDate">
+    </label>
+
+    <button onclick="makeAppointment()">Записатися</button>
+
+    <p class="result" id="result"></p>
+
+    <script>
+        function makeAppointment() {
+            let name = document.getElementById("petName").value.trim();
+            let date = document.getElementById("visitDate").value;
+            let select = document.getElementById("service");
+            let price = Number(select.value);
+            let serviceName = select.options[select.selectedIndex].text.split(" — ")[0];
+
+            if (name === "" || date === "") {
+                alert("Вкажіть кличку тварини та дату прийому");
+                return;
+            }
+
+            let message = "Тварину " + name + " записано на послугу «" + serviceName +
+                "» на " + date + ". До сплати: " + price + " грн";
+            alert(message);
+            document.getElementById("result").textContent = message;
+        }
+    </script>
+</body>
+</html>
